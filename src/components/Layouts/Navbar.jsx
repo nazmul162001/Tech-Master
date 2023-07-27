@@ -32,36 +32,6 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link
-              className={
-                currentRoute === '/shops'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-              }
-              href={'/shops'}
-            >
-              Shops
-            </Link>
-            <Link
-              className={
-                currentRoute === '/books'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-              }
-              href={'/books'}
-            >
-              Books
-            </Link>
-            <Link
-              className={
-                currentRoute === '/blogs'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-              }
-              href={'/blogs'}
-            >
-              Blogs
-            </Link>
             {!session?.user && (
               <Link
                 className={
@@ -72,18 +42,6 @@ const Navbar = () => {
                 href={'/login'}
               >
                 Login
-              </Link>
-            )}
-            {!session?.user && (
-              <Link
-                className={
-                  currentRoute === '/signup'
-                    ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                    : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-                }
-                href={'/signup'}
-              >
-                Sign Up
               </Link>
             )}
             {session?.user && (
