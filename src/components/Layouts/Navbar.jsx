@@ -20,14 +20,14 @@ const Navbar = () => {
       <div className='w-full hidden md:block'>
         <div className='px-5 w-full py-4 flex justify-between'>
           <div>
-            <span className='text-2xl font-bold'>Pc-Builder</span>
+            <Link href='/' className='text-2xl font-bold'>
+              Pc-Builder
+            </Link>
           </div>
           <div className='flex items-center gap-5 justify-end'>
             <Link
               className={
-                currentRoute === '/'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
+                currentRoute === '/' ? 'active custom_link' : 'custom_link'
               }
               href={'/'}
             >
@@ -36,19 +36,19 @@ const Navbar = () => {
             <Link
               className={
                 currentRoute === '/pc-builder'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
+                  ? 'active custom_link'
+                  : 'custom_link'
               }
-              href={'/'}
+              href={'/pc-builder'}
             >
-              PC Builder
+              PC BUILDER
             </Link>
             {!session?.user && (
               <Link
                 className={
                   currentRoute === '/login'
-                    ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                    : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
+                    ? 'active custom_link'
+                    : 'custom_link'
                 }
                 href={'/login'}
               >
@@ -56,7 +56,17 @@ const Navbar = () => {
               </Link>
             )}
             {session?.user && (
-              <button onClick={() => signOut()}>Sign Out</button>
+              <Link
+                className={
+                  currentRoute === '/login'
+                    ? 'active custom_link'
+                    : 'custom_link'
+                }
+                onClick={() => signOut()}
+                href={'/login'}
+              >
+                Sign Out
+              </Link>
             )}
           </div>
         </div>
@@ -69,7 +79,7 @@ const Navbar = () => {
             <Sidebar isOpen={isOpen} setOpen={setOpen} />
           </div>
           <div>
-            <h2 className='text-2xl font-bold'>PC Builder</h2>
+            <Link href='pcBuilder'>PC Builder</Link>
           </div>
           <div>
             <GiComputerFan className='text-2xl' />

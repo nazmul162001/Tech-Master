@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+    overflow-x: hidden;
+}
+
+/* menu  hover effect  */
+.custom_link {
+    background-image: linear-gradient(
+      to right,
+      #F1592B,
+      #F1592B 50%,
+      #064532 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .custom_link:before {
+    content: '';
+    background: #F1592B;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .custom_link:hover,
+  .custom_link.active {
+   background-position: 0;
+  }
+  
+  .custom_link:hover::before,
+  .custom_link.active::before {
+    width:100%;
+  }
+
+  /* style for mobile menu  */
+  .custom_link_.active_{
+    background-color: #064532;
+    color: white;
+  }
+  .custom_link_{
+    background-color: white;
+    color: black;
+  }
