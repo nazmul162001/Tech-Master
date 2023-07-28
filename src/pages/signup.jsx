@@ -17,7 +17,7 @@ const SignUp = () => {
       <Head>
         <title>Next Sign Up</title>
       </Head>
-      <div className={styles.form}>
+      <div className='form'>
         <h3>SIGN UP</h3>
         <hr />
         <form className='text-left' onSubmit={handleSubmit(onSubmit)}>
