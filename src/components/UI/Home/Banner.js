@@ -4,7 +4,7 @@ import React from 'react'
 
 const Banner = () => {
   return (
-    <div className='w-full h-screen'>
+    <div className='w-full'>
       <main className='grid grid-cols-1 md:grid-cols-2 gap-3 '>
         <div className='w-full h-full flex flex-col justify-center pl-16'>
           <h2 className='text-4xl font-bold font-mono text-gray-700 '>
