@@ -33,6 +33,7 @@ const ReviewForm = ({ singleData }) => {
       })
       reset()
       setModal2Open(false)
+      window.location.reload();
     } catch (error) {
       console.error('Error submitting review:', error)
     } finally {

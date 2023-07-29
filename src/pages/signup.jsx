@@ -8,7 +8,7 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     // You can handle form submission here
-    console.log(data)
+    // console.log(data)
   }
 
   return (

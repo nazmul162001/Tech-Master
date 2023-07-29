@@ -3,9 +3,59 @@ import ReviewForm from '@/components/review/ReviewForm'
 import { FolderAddOutlined } from '@ant-design/icons'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Rate } from 'antd'
+import { format, isValid } from 'date-fns'
 
 const Components = ({ singleData, relatedProduct }) => {
+  const [averageRating, setAverageRating] = useState(0)
+  // console.log(singleData?.data?.reviews)
+  useEffect(() => {
+    // Calculate the average rating
+    const reviews = singleData?.data?.reviews
+    let sumRatings = 0
+
+    if (reviews && reviews.length > 0) {
+      reviews.forEach((review) => {
+        const individualRating = review.individualRating
+        if (typeof individualRating === 'number') {
+          sumRatings += individualRating
+        } else {
+          console.warn('Invalid individualRating:', individualRating)
+        }
+      })
+
+      const calculatedAverageRating = sumRatings / reviews.length
+
+      // Update the state with the calculated average rating
+      setAverageRating(calculatedAverageRating.toFixed(1))
+    } else {
+      console.warn('No reviews found or empty reviews array.')
+    }
+  }, [singleData?.data?.reviews])
+
+  // Review days count
+  const calculateDaysAgo = (date) => {
+    const currentDate = new Date()
+    const reviewDate = new Date(date)
+    const timeDifference = currentDate.getTime() - reviewDate.getTime()
+
+    // Calculate days, hours, and minutes
+    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+    const hoursAgo = Math.floor(timeDifference / (1000 * 60 * 60))
+    const minutesAgo = Math.floor(timeDifference / (1000 * 60))
+
+    if (daysAgo >= 1) {
+      return `${daysAgo} day${daysAgo !== 1 ? 's' : ''} ago`
+    } else if (hoursAgo >= 1) {
+      return `${hoursAgo} hour${hoursAgo !== 1 ? 's' : ''} ago`
+    } else if (minutesAgo >= 1) {
+      return `${minutesAgo} minute${minutesAgo !== 1 ? 's' : ''} ago`
+    } else {
+      return 'Less than a minute ago'
+    }
+  }
+
   return (
     <div className='w-full px-5 flex justify-center items-center'>
       <div className='w-full mx-3 bg-white'>
@@ -92,12 +142,16 @@ const Components = ({ singleData, relatedProduct }) => {
               <div>specification</div>
               {/* description */}
               <div>Description</div>
+
               {/* Review  */}
               <div className='my-10 w-full h-full'>
                 <div>
                   <div className='w-full h-full flex justify-between items-center gap-10 my-3 pb-3 border-b '>
                     <div>
-                      <h2 className='font-bold'>Reviews(0)</h2>
+                      <h2 className='font-bold'>
+                        Reviews({singleData?.data?.reviews.length}) avg(
+                        {averageRating})
+                      </h2>
                       <p className='text-gray-500'>
                         Get specific details about this product from customers
                         who own it.
@@ -108,9 +162,61 @@ const Components = ({ singleData, relatedProduct }) => {
                     </div>
                   </div>
                   <div>
-                    <h3 className='font-medium font-mono mt-5'>
-                      This product has no review Yet
-                    </h3>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                      {singleData?.data?.reviews?.map((review, index) => (
+                        <div key={index} className='bg-[#f2f4f8] rounded p-3'>
+                          <div className='flex gap-4 border-b border-gray-300 pb-3 items-center'>
+                            <div className='w-16 h-16 rounded-full flex justify-center items-center'>
+                              {/* <Space direction='vertical' size={16}>
+                              <Avatar size={64} icon={<UserOutlined />} />
+                            </Space> */}
+                              <Image
+                                className='rounded-full'
+                                src='/review.jpg'
+                                width={64}
+                                height={64}
+                                layout='responsive'
+                                alt='review/img'
+                              ></Image>
+                            </div>
+                            <div>
+                              <h1>{review.name}</h1>
+                              <Rate
+                                allowHalf
+                                disabled
+                                defaultValue={review.individualRating}
+                              />
+                              <p className='text-gray-500'>
+                                {(() => {
+                                  try {
+                                    const createdAtDate = new Date(review?.date)
+                                    return format(
+                                      createdAtDate,
+                                      'MMM dd, yyyy - hh:mm a'
+                                    )
+                                  } catch (error) {
+                                    return 'Review Time Not Found'
+                                  }
+                                })()}
+                              </p>
+                              <p className='text-gray-500'>
+                                {calculateDaysAgo(review?.date)}
+                              </p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className='text-left mt-2 text-gray-500'>
+                              description
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className='h-32 md:hidden w-full flex justify-center items-center'>
+                      <h3 className='font-mono font-bold'>
+                        This product has no review Yet
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -171,7 +277,7 @@ export const getServerSideProps = async (context) => {
   )
   const data = await res.json()
 
-  // getting all data
+  // getting category filter data data
   const response = await fetch(
     `http://localhost:5000/api/v1/products?category=${data?.data?.category}`
   )
