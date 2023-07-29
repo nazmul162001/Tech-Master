@@ -1,4 +1,5 @@
 import RootLayout from '@/components/Layouts/RootLayout'
+import ReviewForm from '@/components/review/ReviewForm'
 import { FolderAddOutlined } from '@ant-design/icons'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -74,14 +75,48 @@ const Components = ({ singleData, relatedProduct }) => {
 
         {/* product details area  */}
         <div className='grid grid-cols-12 gap-3 my-10 border-t pt-5 mx-5'>
-          <div className='col-span-8 flex gap-5 items-start'>
-            <button className='px-5 bg-[#E5330B] text-white rounded py-1'>
-              Description
-            </button>
-            <button className='px-5 bg-[#E5330B] text-white rounded py-1'>
-              Reviews
-            </button>
+          <div className='col-span-8 flex gap-5 items-start w-full'>
+            <div className='w-full'>
+              <div className='flex justify-center items-center w-full gap-3 border-b pb-3'>
+                <button className='px-5 bg-[#E5330B] text-white rounded py-1'>
+                  Specification
+                </button>
+                <button className='px-5 bg-[#f2f4f8] text-black rounded py-1'>
+                  Description
+                </button>
+                <button className='px-5 bg-[#f2f4f8] text-black rounded py-1'>
+                  Reviews
+                </button>
+              </div>
+              {/* specification  */}
+              <div>specification</div>
+              {/* description */}
+              <div>Description</div>
+              {/* Review  */}
+              <div className='my-10 w-full h-full'>
+                <div>
+                  <div className='w-full h-full flex justify-between items-center gap-10 my-3 pb-3 border-b '>
+                    <div>
+                      <h2 className='font-bold'>Reviews(0)</h2>
+                      <p className='text-gray-500'>
+                        Get specific details about this product from customers
+                        who own it.
+                      </p>
+                    </div>
+                    <div className='flex justify-end'>
+                      <ReviewForm singleData={singleData} />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className='font-medium font-mono mt-5'>
+                      This product has no review Yet
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div className='col-span-4 bg-[#f2f4f8] py-5'>
             <h2 className='text-center text-blue-600 font-medium text-xl '>
               Related Product
