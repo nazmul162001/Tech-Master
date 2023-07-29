@@ -5,31 +5,31 @@ import React, { useState } from 'react'
 
 const Categories = [
   {
-    link: '/pc-components/processor',
+    link: '/categories/processor',
     name: 'CPU / Processor',
   },
   {
-    link: '/pc-components/motherboard',
+    link: '/categories/motherboard',
     name: 'Motherboard',
   },
   {
-    link: '/pc-components/ram',
+    link: '/categories/ram',
     name: 'RAM',
   },
   {
-    link: '/pc-components/powerSupplyUnit',
+    link: '/categories/powerSupplyUnit',
     name: 'Power Supply Unit',
   },
   {
-    link: '/pc-components/storageDevice',
+    link: '/categories/storageDevice',
     name: 'Storage Device',
   },
   {
-    link: '/pc-components/monitor',
+    link: '/categories/monitor',
     name: 'Monitor',
   },
   {
-    link: '/pc-components/others',
+    link: '/categories/others',
     name: 'Others ',
   },
 ]

@@ -35,9 +35,9 @@ const Navbar = () => {
             </Link>
             <Link
               className={
-                currentRoute === '/Pc-components' ? 'active custom_link' : 'custom_link'
+                currentRoute === '/categories/processor' ? 'active custom_link' : 'custom_link'
               }
-              href={'/Pc-components'}
+              href={'/categories/processor'}
             >
               Categories
             </Link>
