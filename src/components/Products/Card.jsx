@@ -4,10 +4,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 const { Meta } = Card
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
+  // console.log(product?.name)
+  const { name, price, _id } = product
   return (
     <div className='px-5'>
-      <Link href='/1645654644'>
+      <Link href={`/${_id}`}>
         <Card
           hoverable
           cover={
@@ -20,8 +22,10 @@ const ProductCard = () => {
             />
           }
         >
-          <Meta title='MSI PRO MP223 21.45" Full HD Business Monitor' />
-          <p className='my-2 text-gray-500 font-bold'>Price: $399.99</p>
+          <Meta title={name} />
+          <p className='my-2 text-gray-500 font-bold'>
+            Price: $<span>{price}</span>
+          </p>
         </Card>
       </Link>
     </div>
@@ -29,5 +33,3 @@ const ProductCard = () => {
 }
 
 export default ProductCard
-
-

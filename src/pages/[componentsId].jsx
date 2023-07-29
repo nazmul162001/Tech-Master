@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Components = () => {
+const Components = ({ singleData, relatedProduct }) => {
   return (
     <div className='w-full px-5 flex justify-center items-center'>
       <div className='w-full mx-3 bg-white'>
@@ -21,7 +21,7 @@ const Components = () => {
           </div>
           <div className='col-span-12 md:col-span-7 mt-5'>
             <h2 className='text-xl text-blue-600 font-mono font-medium'>
-              MSI PRO MP223 21.45 Full HD Business Monitor
+              {singleData?.data?.name}
             </h2>
             {/* information  */}
             <div className='top-category flex gap-3 items-center'>
@@ -87,100 +87,34 @@ const Components = () => {
               Related Product
             </h2>
             {/* related card  */}
-            <div className='cursor-pointer grid grid-cols-12 items-center border-b border-b-gray-300 mx-2'>
-              <div className='col-span-4'>
-                <Image
-                  className='p-5'
-                  src='/pcc.png'
-                  width={10}
-                  height={10}
-                  layout='responsive'
-                  alt='/related/product'
-                ></Image>
-              </div>
-              <div className='col-span-8'>
-                <h2>Dell E2016HV 19.5 LED Monitor</h2>
-                <p className='text-orange-500'>
-                  9,499{' '}
-                  <span className='text-gray-500 line-through pl-2'>9,499</span>{' '}
-                </p>
-                <span className='flex items-center gap-2 text-gray-500'>
-                  <FolderAddOutlined /> Add To Compare
-                </span>
-              </div>
-            </div>
-
-            {/* related card  */}
-            <div className='grid grid-cols-12 items-center border-b border-b-gray-300 mx-2 cursor-pointer'>
-              <div className='col-span-4'>
-                <Image
-                  className='p-5'
-                  src='/pcc.png'
-                  width={10}
-                  height={10}
-                  layout='responsive'
-                  alt='/related/product'
-                ></Image>
-              </div>
-              <div className='col-span-8'>
-                <h2>Dell E2016HV 19.5 LED Monitor</h2>
-                <p className='text-orange-500'>
-                  9,499{' '}
-                  <span className='text-gray-500 line-through pl-2'>9,499</span>{' '}
-                </p>
-                <span className='flex items-center gap-2 text-gray-500'>
-                  <FolderAddOutlined /> Add To Compare
-                </span>
-              </div>
-            </div>
-
-            {/* related card  */}
-            <div className='cursor-pointer grid grid-cols-12 items-center border-b border-b-gray-300 mx-2'>
-              <div className='col-span-4'>
-                <Image
-                  className='p-5'
-                  src='/pcc.png'
-                  width={10}
-                  height={10}
-                  layout='responsive'
-                  alt='/related/product'
-                ></Image>
-              </div>
-              <div className='col-span-8'>
-                <h2>Dell E2016HV 19.5 LED Monitor</h2>
-                <p className='text-orange-500'>
-                  9,499{' '}
-                  <span className='text-gray-500 line-through pl-2'>9,499</span>{' '}
-                </p>
-                <span className='flex items-center gap-2 text-gray-500'>
-                  <FolderAddOutlined /> Add To Compare
-                </span>
-              </div>
-            </div>
-
-            {/* related card  */}
-            <div className='cursor-pointer grid grid-cols-12 items-center border-b border-b-gray-300 mx-2'>
-              <div className='col-span-4'>
-                <Image
-                  className='p-5'
-                  src='/pcc.png'
-                  width={10}
-                  height={10}
-                  layout='responsive'
-                  alt='/related/product'
-                ></Image>
-              </div>
-              <div className='col-span-8'>
-                <h2>Dell E2016HV 19.5 LED Monitor</h2>
-                <p className='text-orange-500'>
-                  9,499{' '}
-                  <span className='text-gray-500 line-through pl-2'>9,499</span>{' '}
-                </p>
-                <span className='flex items-center gap-2 text-gray-500'>
-                  <FolderAddOutlined /> Add To Compare
-                </span>
-              </div>
-            </div>
+            {relatedProduct?.data?.slice(0, 5).map((product, index) => (
+              <Link key={index} href={`/${product._id}`}>
+                <div className='cursor-pointer grid grid-cols-12 items-center border-b border-b-gray-300 mx-2 mb-5'>
+                  <div className='col-span-4'>
+                    <Image
+                      className='p-5'
+                      src='/pcc.png'
+                      width={10}
+                      height={10}
+                      layout='responsive'
+                      alt='/related/product'
+                    ></Image>
+                  </div>
+                  <div className='col-span-8'>
+                    <h2>Dell E2016HV 19.5 LED Monitor</h2>
+                    <p className='text-orange-500'>
+                      9,499{' '}
+                      <span className='text-gray-500 line-through pl-2'>
+                        9,499
+                      </span>{' '}
+                    </p>
+                    <span className='flex items-center gap-2 text-gray-500'>
+                      <FolderAddOutlined /> Add To Compare
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -192,4 +126,26 @@ export default Components
 
 Components.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>
+}
+
+export const getServerSideProps = async (context) => {
+  //  getting single data
+  const { params } = context
+  const res = await fetch(
+    `http://localhost:5000/api/v1/products/${params.componentsId}`
+  )
+  const data = await res.json()
+
+  // getting all data
+  const response = await fetch(
+    `http://localhost:5000/api/v1/products?category=${data?.data?.category}`
+  )
+  const allData = await response.json()
+
+  return {
+    props: {
+      singleData: data,
+      relatedProduct: allData,
+    },
+  }
 }
