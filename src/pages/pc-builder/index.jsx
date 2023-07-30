@@ -1,6 +1,7 @@
 import RootLayout from '@/components/Layouts/RootLayout'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PcBuilderCategoryCard from '@/components/Products/PcBuilder'
+import Link from 'next/link'
 
 const PcBuilder = () => {
   return (
@@ -12,12 +13,33 @@ const PcBuilder = () => {
         <p className='my-3 bg-gray-500 px-3 text-white rounded'>
           core components
         </p>
-
-        <PcBuilderCategoryCard />
-        <PcBuilderCategoryCard />
-        <PcBuilderCategoryCard />
-        <PcBuilderCategoryCard />
-        <PcBuilderCategoryCard />
+        <Link href='/pc-builder/cpu'>
+          <PcBuilderCategoryCard url={'cpu'} title={'CPU / Processor'} />
+        </Link>
+        <Link href='/pc-builder/motherboard'>
+          <PcBuilderCategoryCard url={'motherboard'} title={'Motherboard'} />
+        </Link>
+        <Link href='/pc-builder/ram'>
+          <PcBuilderCategoryCard url={'ram'} title={'RAM'} />
+        </Link>
+        <Link href='/pc-builder/powerSupplyUnit'>
+          <PcBuilderCategoryCard
+            url={'powerSupplyUnit'}
+            title={'Power Supply Unit'}
+          />
+        </Link>
+        <Link href='/pc-builder/storageDevice'>
+          <PcBuilderCategoryCard
+            url={'storageDevice'}
+            title={'Storage Device'}
+          />
+        </Link>
+        <Link href='/pc-builder/monitor'>
+          <PcBuilderCategoryCard url={'monitor'} title={'Monitor'} />
+        </Link>
+        <Link href='/pc-builder/others'>
+          <PcBuilderCategoryCard url={'others'} title={'Others'} />
+        </Link>
       </div>
     </div>
   )

@@ -117,7 +117,7 @@ const Components = ({ singleData, relatedProduct }) => {
                 className='px-10 py-2 bg-blue-600 text-white rounded'
                 href='pc-builder'
               >
-                Buy Now
+                PC Builder
               </Link>
             </button>
           </div>
@@ -128,23 +128,49 @@ const Components = ({ singleData, relatedProduct }) => {
           <div className='col-span-8 flex gap-5 items-start w-full'>
             <div className='w-full'>
               <div className='flex justify-center items-center w-full gap-3 border-b pb-3'>
-                <button className='px-5 bg-[#E5330B] text-white rounded py-1'>
+                <button
+                  onClick={() => {
+                    const reviewsSection =
+                      document.getElementById('specification')
+                    if (reviewsSection) {
+                      reviewsSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                  className='px-5 bg-[#E5330B] text-white rounded py-1'
+                >
                   Specification
                 </button>
-                <button className='px-5 bg-[#f2f4f8] text-black rounded py-1'>
+                <button
+                  onClick={() => {
+                    const reviewsSection =
+                      document.getElementById('description')
+                    if (reviewsSection) {
+                      reviewsSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                  className='px-5 bg-[#f2f4f8] text-black rounded py-1'
+                >
                   Description
                 </button>
-                <button className='px-5 bg-[#f2f4f8] text-black rounded py-1'>
+                <button
+                  onClick={() => {
+                    const reviewsSection = document.getElementById('reviews')
+                    if (reviewsSection) {
+                      reviewsSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                  className='px-5 bg-[#f2f4f8] text-black rounded py-1'
+                >
                   Reviews
                 </button>
               </div>
               {/* specification  */}
-              <div>specification</div>
+              <div id='specification'>specification</div>
               {/* description */}
-              <div>Description</div>
+              <div id='description'>Description</div>
 
               {/* Review  */}
-              <div className='my-10 w-full h-full'>
+              <div id='reviews' className='my-10 w-full h-full'>
                 <div>
                   <div className='w-full h-full flex justify-between items-center gap-10 my-3 pb-3 border-b '>
                     <div>
@@ -269,9 +295,24 @@ Components.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>
 }
 
-export const getServerSideProps = async (context) => {
+export async function getStaticPaths() {
+  const res = await fetch('http://localhost:5000/api/v1/products')
+  const products = await res.json()
+
+  const paths = products?.data
+    ?.map((product) => {
+      if (product.id !== undefined) {
+        return { params: { componentsId: product.id.toString() } }
+      }
+      return null
+    })
+    .filter((path) => path !== null)
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps = async ({ params }) => {
   //  getting single data
-  const { params } = context
   const res = await fetch(
     `http://localhost:5000/api/v1/products/${params.componentsId}`
   )
