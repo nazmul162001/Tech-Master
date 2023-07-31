@@ -119,7 +119,7 @@ PcBuilder.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async () => {
   const res = await fetch(
-    `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/pcBuild`
+    `https://pc-builder-server-dusky.vercel.app/api/v1/pcBuild`
   )
   const data = await res.json()
 

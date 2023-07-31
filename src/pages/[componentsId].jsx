@@ -210,7 +210,7 @@ const Components = ({ singleData, relatedProduct }) => {
                               <Rate
                                 allowHalf
                                 disabled
-                                defaultValue={review.individualRating}
+                                defaultValue={4.5}
                               />
                               <p className='text-gray-500'>
                                 {(() => {
@@ -297,7 +297,7 @@ Components.getLayout = function getLayout(page) {
 
 export async function getStaticPaths() {
   const res = await fetch(
-    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products'
+    'https://pc-builder-server-dusky.vercel.app/api/v1/products'
   )
   const products = await res.json()
 
@@ -316,13 +316,13 @@ export async function getStaticPaths() {
 export const getStaticProps = async ({ params }) => {
   //  getting single data
   const res = await fetch(
-    `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products/${params.componentsId}`
+    `https://pc-builder-server-dusky.vercel.app/api/v1/products/${params.componentsId}`
   )
   const data = await res.json()
 
   // getting category filter data data
   const response = await fetch(
-    `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products?category=${data?.data?.category}`
+    `https://pc-builder-server-dusky.vercel.app/api/v1/products?category=${data?.data?.category}`
   )
   const allData = await response.json()
 

@@ -25,14 +25,14 @@ const Login = () => {
           <GoogleOutlined
             onClick={() =>
               signIn('google', {
-                callbackUrl: 'http://localhost:3000',
+                callbackUrl: 'https://pc-builder-nextjs-client.vercel.app',
               })
             }
           />
           <GithubOutlined
             onClick={() =>
               signIn('github', {
-                callbackUrl: 'http://localhost:3000',
+                callbackUrl: 'https://pc-builder-nextjs-client.vercel.app',
               })
             }
           />

@@ -1,11 +1,69 @@
 import Link from 'next/link'
-import { GiHamburgerMenu } from 'react-icons/gi'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import { Divide as Hamburger } from 'hamburger-react'
 import { GiComputerFan } from 'react-icons/gi'
 import Sidebar from './Sidebar/Sidebar'
+import { Dropdown } from 'antd'
+const items = [
+  {
+    key: '1',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/processor'>
+        CPU / Processor
+      </Link>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/motherboard'>
+        Motherboard
+      </Link>
+    ),
+  },
+  {
+    key: '3',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/ram'>
+        RAM
+      </Link>
+    ),
+  },
+  {
+    key: '4',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/powerSupplyUnit'>
+        Power Supply Unit
+      </Link>
+    ),
+  },
+  {
+    key: '5',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/storageDevice'>
+        Storage Device
+      </Link>
+    ),
+  },
+  {
+    key: '5',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/monitor'>
+        Monitor
+      </Link>
+    ),
+  },
+  {
+    key: '5',
+    label: (
+      <Link rel='noopener noreferrer' href='/categories/others'>
+        Others
+      </Link>
+    ),
+  },
+]
 
 const Navbar = () => {
   const currentRoute = usePathname()
@@ -33,14 +91,26 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link
-              className={
-                currentRoute === '/categories/processor' ? 'active custom_link' : 'custom_link'
-              }
-              href={'/categories/processor'}
+
+            <Dropdown
+              menu={{
+                items,
+              }}
+              placement='bottomRight'
+              arrow
             >
-              Categories
-            </Link>
+              <Link
+                className={
+                  currentRoute === '/categories/processor'
+                    ? 'active custom_link'
+                    : 'custom_link'
+                }
+                href={'/categories/processor'}
+              >
+                Categories
+              </Link>
+            </Dropdown>
+
             <Link
               className={
                 currentRoute === '/pc-builder'
@@ -55,8 +125,8 @@ const Navbar = () => {
               <Link
                 className={
                   currentRoute === '/login'
-                    ? 'active custom_link'
-                    : 'custom_link'
+                    ? 'active custom_link active_user_login'
+                    : 'custom_link user_login'
                 }
                 href={'/login'}
               >
@@ -67,8 +137,8 @@ const Navbar = () => {
               <Link
                 className={
                   currentRoute === '/login'
-                    ? 'active custom_link'
-                    : 'custom_link'
+                    ? 'active custom_link active_user_login'
+                    : 'custom_link user_login'
                 }
                 onClick={() => signOut()}
                 href={'/login'}

@@ -12,7 +12,7 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
   const handleCopyProductToMypc = async (productId) => {
     try {
       const response = await fetch(
-        'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/pcbuild',
+        'https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild',
         {
           method: 'POST',
           headers: {
@@ -28,7 +28,7 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
       if (response.ok) {
         // Product data copied successfully
         setCopiedProductId(productId)
-        window.location.reload()
+        // window.location.reload()
         toast.success('Successfully added product')
       } else {
         // Handle the error if necessary
@@ -109,7 +109,7 @@ CategoryPowerSupplyInfo.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products?category=Power Supply Unit'
+    'https://pc-builder-server-dusky.vercel.app/api/v1/products?category=Power Supply Unit'
   )
   const cpu = await response.json()
 

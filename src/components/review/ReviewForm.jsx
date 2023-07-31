@@ -18,7 +18,7 @@ const ReviewForm = ({ singleData }) => {
     setSubmittingReview(true)
     try {
       await fetch(
-        `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products/${currentProductId}/reviews`,
+        `https://pc-builder-server-dusky.vercel.app/api/v1/products/${currentProductId}/reviews`,
         {
           method: 'POST',
           headers: {
@@ -33,7 +33,7 @@ const ReviewForm = ({ singleData }) => {
       })
       reset()
       setModal2Open(false)
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       console.error('Error submitting review:', error)
     } finally {

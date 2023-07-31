@@ -15,7 +15,7 @@ export const authOptions = {
   ],
   // for privet route
   pages: {
-    signIn: 'https://pc-builder-nextjs-client.vercel.app/login',
+    signIn: 'https://pc-builder-nextjs-client.vercel.app//login',
   },
 }
 

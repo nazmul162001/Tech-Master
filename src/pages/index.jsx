@@ -21,7 +21,7 @@ HomePage.getLayout = function getLayout(page) {
 
 export const getStaticProps = async () => {
   const res = await fetch(
-    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products'
+    'https://pc-builder-server-dusky.vercel.app/api/v1/products'
   )
   const data = await res.json()
   // console.log(data)

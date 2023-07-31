@@ -1,5 +1,3 @@
-// import Navbar from "@/component/UI/Layouts/navbar";
-import Banner from '@/components/UI/Home/Banner'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { ToastContainer } from 'react-toastify'
