@@ -1,10 +1,41 @@
 import RootLayout from '@/components/Layouts/RootLayout'
+import { getSession, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const CategoryCpuInfo = ({ relatedProduct }) => {
-  // console.log(relatedProduct?.data)
+  const { data: session } = useSession()
+  const [copiedProductId, setCopiedProductId] = useState(null)
+
+  const handleCopyProductToMypc = async (productId) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/pcbuild', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product: productId,
+          userEmail: session?.user?.email,
+        }),
+      })
+
+      if (response.ok) {
+        // Product data copied successfully
+        setCopiedProductId(productId)
+        window.location.reload()
+        toast.success('Successfully added product')
+      } else {
+        // Handle the error if necessary
+        toast.error('Already added this product')
+        console.error('Failed to copy product data:', response.statusText)
+      }
+    } catch (error) {
+      console.error('Error while copying product data:', error.message)
+    }
+  }
   return (
     <div className='w-full px-5 flex justify-center items-center'>
       <div className='w-full md:w-4/5 h-full bg-white md:p-8 p-3'>
@@ -43,10 +74,15 @@ const CategoryCpuInfo = ({ relatedProduct }) => {
               <h3 className='font-medium text-xl'>
                 7,000 <span className='text-3xl font-bold'>৳</span>
               </h3>
-              <button type='button' class='btn btn--purple mt-2'>
+              <button
+                onClick={() => handleCopyProductToMypc(product?._id)}
+                type='button'
+                className='btn btn--purple mt-2'
+                disabled={copiedProductId === product?._id}
+              >
                 <span class='btn__txt'>
                   <Link className='text-white' href='/pc-builder'>
-                    Add
+                    {copiedProductId === product?._id ? 'Added' : 'Add'}
                   </Link>
                 </span>
                 <i class='btn__bg' aria-hidden='true'></i>

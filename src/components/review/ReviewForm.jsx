@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { Button, Input, Modal, Rate } from 'antd'
 const { TextArea } = Input
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
 const ReviewForm = ({ singleData }) => {
   const currentProductId = singleData?.data?._id
@@ -33,7 +33,7 @@ const ReviewForm = ({ singleData }) => {
       })
       reset()
       setModal2Open(false)
-      window.location.reload();
+      window.location.reload()
     } catch (error) {
       console.error('Error submitting review:', error)
     } finally {
