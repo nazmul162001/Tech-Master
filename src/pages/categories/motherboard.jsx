@@ -32,9 +32,15 @@ const MotherBoard = ({ filterData }) => {
                     />
                   }
                 >
+                  <p className='my-2 text-gray-500 font-bold'>
+                    <span>{data?.status}</span>
+                  </p>
                   <Meta title={data?.name} />
                   <p className='my-2 text-gray-500 font-bold'>
                     Price: $<span>{data?.price}</span>
+                  </p>
+                  <p className='my-2 text-gray-500 font-bold'>
+                    Category: <span>{data?.category}</span>
                   </p>
                 </Card>
               </Link>

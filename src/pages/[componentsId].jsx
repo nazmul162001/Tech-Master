@@ -165,9 +165,50 @@ const Components = ({ singleData, relatedProduct }) => {
                 </button>
               </div>
               {/* specification  */}
-              <div id='specification'>specification</div>
+              <div id='specification'>
+                <p className='w-full bg-[#F2F4F8] px-2 font-medium font-mono'>
+                  Key-Features:
+                </p>
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Brand:</p>
+                  <p>{singleData?.data?.keyFeatures?.Brand}</p>
+                </div>
+
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Model:</p>
+                  <p>{singleData?.data?.keyFeatures?.Model}</p>
+                </div>
+
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Specification:</p>
+                  <p>{singleData?.data?.keyFeatures?.Specification}</p>
+                </div>
+
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Port:</p>
+                  <p>{singleData?.data?.keyFeatures?.Port}</p>
+                </div>
+
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Type:</p>
+                  <p>{singleData?.data?.keyFeatures?.Type}</p>
+                </div>
+
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Resolution:</p>
+                  <p>{singleData?.data?.keyFeatures?.Resolution}</p>
+                </div>
+
+                <div className='flex flex-wrap gap-5 border-b pb-1 hover:bg-[#F2F4F8] mt-2 text-gray-500'>
+                  <p className='w-full md:w-1/3'>Voltage:</p>
+                  <p>{singleData?.data?.keyFeatures?.Voltage}</p>
+                </div>
+              </div>
               {/* description */}
-              <div id='description'>Description</div>
+              <div id='description' className='mt-10 my-3'>
+                <h4 className='font-bold text-gray-500 my-3'>Description:</h4>
+                <p>{singleData?.data?.description}</p>
+              </div>
 
               {/* Review  */}
               <div id='reviews' className='my-10 w-full h-full'>
@@ -207,11 +248,7 @@ const Components = ({ singleData, relatedProduct }) => {
                             </div>
                             <div>
                               <h1>{review.name}</h1>
-                              <Rate
-                                allowHalf
-                                disabled
-                                defaultValue={4.5}
-                              />
+                              <Rate allowHalf disabled defaultValue={4.5} />
                               <p className='text-gray-500'>
                                 {(() => {
                                   try {
