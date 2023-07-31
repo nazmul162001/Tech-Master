@@ -28,7 +28,7 @@ const CategoryMonitorInfo = ({ relatedProduct }) => {
       if (response.ok) {
         // Product data copied successfully
         setCopiedProductId(productId)
-        // window.location.reload()
+        window.location.reload()
         toast.success('Successfully added product')
       } else {
         // Handle the error if necessary

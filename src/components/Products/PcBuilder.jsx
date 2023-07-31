@@ -1,9 +1,17 @@
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const PcBuilder = ({ title, url }) => {
-  // console.log(product)
+const PcBuilder = ({ title, url, filteredPCBuilds }) => {
+  const isCategorySelected = (category) => {
+    return (
+      Array.isArray(filteredPCBuilds) &&
+      filteredPCBuilds.some((item) => item.product.category === category)
+    )
+  }
+
+  const isChooseButtonDisabled = isCategorySelected(title)
 
   return (
     <>
@@ -32,17 +40,25 @@ const PcBuilder = ({ title, url }) => {
 
         {/* choose button  */}
         <div className='text-right '>
-          <button type='button' class='btn btn--purple'>
-            <span class='btn__txt'>
-              <Link className='text-white' href={`/pc-builder/${url}`}>
-                Choose
-              </Link>
-            </span>
-            <i class='btn__bg' aria-hidden='true'></i>
-            <i class='btn__bg' aria-hidden='true'></i>
-            <i class='btn__bg' aria-hidden='true'></i>
-            <i class='btn__bg' aria-hidden='true'></i>
-          </button>
+          {isChooseButtonDisabled ? (
+            // If the category has been selected, show the simple disabled button
+            <button type='button' className='btn btn--disabled cursor-not-allowed border text-[#A19AFE]'>
+              Selected
+            </button>
+          ) : (
+            // If the category has not been selected, show the previous "Choose" button
+            <button
+              type='button'
+              className='btn btn--purple'
+              onClick={() => {
+                // Perform the action when the button is clicked
+                // For example, navigate to the specified URL
+                window.location.href = `/pc-builder/${url}`
+              }}
+            >
+              Choose
+            </button>
+          )}
         </div>
       </div>
     </>

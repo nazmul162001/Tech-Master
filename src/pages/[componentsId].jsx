@@ -332,20 +332,33 @@ Components.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>
 }
 
+// export async function getStaticPaths() {
+//   const res = await fetch(
+//     'https://pc-builder-server-dusky.vercel.app/api/v1/products'
+//   )
+//   const products = await res.json()
+
+//   const paths = products?.data
+//     ?.map((product) => {
+//       if (product._id !== undefined) {
+//         return { params: { componentsId: product._id.toString() } }
+//       }
+//       return null
+//     })
+//     .filter((path) => path !== null)
+
+//   return { paths, fallback: false }
+// }
+
 export async function getStaticPaths() {
   const res = await fetch(
     'https://pc-builder-server-dusky.vercel.app/api/v1/products'
   )
   const products = await res.json()
 
-  const paths = products?.data
-    ?.map((product) => {
-      if (product.id !== undefined) {
-        return { params: { componentsId: product.id.toString() } }
-      }
-      return null
-    })
-    .filter((path) => path !== null)
+  const paths = products?.data?.map((product) => ({
+    params: { componentsId: product._id },
+  }))
 
   return { paths, fallback: false }
 }

@@ -11,6 +11,9 @@ const PcBuilder = ({ pcbuild }) => {
     (build) => build.userEmail === session?.user?.email
   )
 
+  const countData = filteredPCBuilds?.length
+  const isButtonDisabled = countData < 5
+
   return (
     <div className='w-full px-5 '>
       <div className='flex justify-center items-center'>
@@ -22,7 +25,11 @@ const PcBuilder = ({ pcbuild }) => {
             core components
           </p>
 
-          <PcBuilderCategoryCard url={'cpu'} title={'CPU / Processor'} />
+          <PcBuilderCategoryCard
+            url={'cpu'}
+            title={'CPU / Processor'}
+            filteredPCBuilds={filteredPCBuilds}
+          />
 
           {filteredPCBuilds?.map(
             (data, index) =>
@@ -52,7 +59,11 @@ const PcBuilder = ({ pcbuild }) => {
               )
           )}
 
-          <PcBuilderCategoryCard url={'motherboard'} title={'Motherboard'} />
+          <PcBuilderCategoryCard
+            url={'motherboard'}
+            title={'Motherboard'}
+            filteredPCBuilds={filteredPCBuilds}
+          />
 
           {filteredPCBuilds?.map(
             (data, index) =>
@@ -82,7 +93,11 @@ const PcBuilder = ({ pcbuild }) => {
               )
           )}
 
-          <PcBuilderCategoryCard url={'ram'} title={'RAM'} />
+          <PcBuilderCategoryCard
+            url={'ram'}
+            title={'RAM'}
+            filteredPCBuilds={filteredPCBuilds}
+          />
 
           {filteredPCBuilds?.map(
             (data, index) =>
@@ -115,6 +130,7 @@ const PcBuilder = ({ pcbuild }) => {
           <PcBuilderCategoryCard
             url={'powerSupplyUnit'}
             title={'Power Supply Unit'}
+            filteredPCBuilds={filteredPCBuilds}
           />
 
           {filteredPCBuilds?.map(
@@ -148,6 +164,7 @@ const PcBuilder = ({ pcbuild }) => {
           <PcBuilderCategoryCard
             url={'storageDevice'}
             title={'Storage Device'}
+            filteredPCBuilds={filteredPCBuilds}
           />
 
           {filteredPCBuilds?.map(
@@ -178,7 +195,11 @@ const PcBuilder = ({ pcbuild }) => {
               )
           )}
 
-          <PcBuilderCategoryCard url={'monitor'} title={'Monitor'} />
+          <PcBuilderCategoryCard
+            url={'monitor'}
+            title={'Monitor'}
+            filteredPCBuilds={filteredPCBuilds}
+          />
 
           {filteredPCBuilds?.map(
             (data, index) =>
@@ -208,7 +229,11 @@ const PcBuilder = ({ pcbuild }) => {
               )
           )}
 
-          <PcBuilderCategoryCard url={'others'} title={'Others'} />
+          <PcBuilderCategoryCard
+            url={'others'}
+            title={'Others'}
+            filteredPCBuilds={filteredPCBuilds}
+          />
 
           {filteredPCBuilds?.map(
             (data, index) =>
@@ -240,7 +265,16 @@ const PcBuilder = ({ pcbuild }) => {
         </div>
       </div>
       <div className='w-full md:w-4/5 h-full bg-white mx-auto flex justify-end pb-3 pr-8'>
-        <button className='px-8 py-3 rounded border hover:border-orange-500 border-gray-500 text-black hover:bg-orange-500 hover:text-white font-medium'>Build PC</button>
+        <button
+          disabled={isButtonDisabled}
+          className={`px-8 py-3 rounded border hover:border-orange-500 ${
+            isButtonDisabled
+              ? 'bg-gray-500 cursor-not-allowed text-white'
+              : 'border-gray-500 text-black hover:bg-orange-500 hover:text-white'
+          } font-medium`}
+        >
+          Build PC
+        </button>
       </div>
     </div>
   )
