@@ -20,7 +20,9 @@ HomePage.getLayout = function getLayout(page) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch('http://localhost:5000/api/v1/products')
+  const res = await fetch(
+    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products'
+  )
   const data = await res.json()
   // console.log(data)
 
@@ -28,6 +30,6 @@ export const getStaticProps = async () => {
     props: {
       products: data,
     },
-    revalidate: 10
+    revalidate: 10,
   }
 }

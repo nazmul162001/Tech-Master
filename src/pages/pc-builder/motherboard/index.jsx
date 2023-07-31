@@ -11,16 +11,19 @@ const CategoryMotherboardInfo = ({ relatedProduct }) => {
 
   const handleCopyProductToMypc = async (productId) => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/pcbuild', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          product: productId,
-          userEmail: session?.user?.email,
-        }),
-      })
+      const response = await fetch(
+        'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/pcbuild',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            product: productId,
+            userEmail: session?.user?.email,
+          }),
+        }
+      )
 
       if (response.ok) {
         // Product data copied successfully
@@ -107,7 +110,7 @@ CategoryMotherboardInfo.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    'http://localhost:5000/api/v1/products?category=motherboard'
+    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products?category=motherboard'
   )
   const cpu = await response.json()
 

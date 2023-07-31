@@ -12,6 +12,8 @@ const Login = () => {
     // console.log(data)
   }
 
+  // const callbackUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
+
   return (
     <div className='flex justify-center items-center'>
       <Head>

@@ -58,7 +58,7 @@ StorageDevice.getLayout = function getLayout(page) {
 
 export const getStaticProps = async () => {
   const response = await fetch(
-    'http://localhost:5000/api/v1/products?category=storageDevice'
+    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products?category=storageDevice'
   )
   const filterData = await response.json()
 

@@ -18,7 +18,7 @@ const ReviewForm = ({ singleData }) => {
     setSubmittingReview(true)
     try {
       await fetch(
-        `http://localhost:5000/api/v1/products/${currentProductId}/reviews`,
+        `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products/${currentProductId}/reviews`,
         {
           method: 'POST',
           headers: {

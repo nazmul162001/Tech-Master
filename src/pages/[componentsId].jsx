@@ -296,7 +296,9 @@ Components.getLayout = function getLayout(page) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch('http://localhost:5000/api/v1/products')
+  const res = await fetch(
+    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products'
+  )
   const products = await res.json()
 
   const paths = products?.data
@@ -314,13 +316,13 @@ export async function getStaticPaths() {
 export const getStaticProps = async ({ params }) => {
   //  getting single data
   const res = await fetch(
-    `http://localhost:5000/api/v1/products/${params.componentsId}`
+    `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products/${params.componentsId}`
   )
   const data = await res.json()
 
   // getting category filter data data
   const response = await fetch(
-    `http://localhost:5000/api/v1/products?category=${data?.data?.category}`
+    `https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products?category=${data?.data?.category}`
   )
   const allData = await response.json()
 

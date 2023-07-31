@@ -16,9 +16,7 @@ const PowerSupplyUnit = ({ filterData }) => {
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
           {filterData?.data?.map((data, index) => (
-            <div
-              key={index}
-            >
+            <div key={index}>
               <Link href={`/${data?._id}`}>
                 <Card
                   className='bg-[#f2f4f8]'
@@ -60,7 +58,7 @@ PowerSupplyUnit.getLayout = function getLayout(page) {
 
 export const getStaticProps = async () => {
   const response = await fetch(
-    'http://localhost:5000/api/v1/products?category=powerSupplyUnit'
+    'https://pc-builder-server-webdevnazmulh-gmailcom.vercel.app/api/v1/products?category=powerSupplyUnit'
   )
   const filterData = await response.json()
 
